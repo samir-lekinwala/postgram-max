@@ -1,9 +1,13 @@
+import { Outlet, Link } from 'react-router-dom'
+
 function App() {
   return (
-    <div>
-      <h1>App</h1>
-      <p>React development has begun!</p>
-    </div>
+    <>
+      <div>
+        <Link to={`/`}><h1>Postgram-max</h1></Link>
+      </div>
+      <Outlet />
+    </>
   )
 }
 
