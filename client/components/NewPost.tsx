@@ -1,67 +1,82 @@
 import React, { useState } from 'react'
-// import { Form } from 'react-router-dom'
+import { redirect } from 'react-router-dom'
+import images from '../images'
 
-const imagesObject = {}
-const imagesArray = []
+interface imagesFileNames {
+  key: string
+}
 
-function saveImageToLocal(
-  imageKey: string,
-  imageData: object,
+function getImages(images: imagesFileNames) {
+  const options = []
+
+  for (const key in images) {
+    const imageFileNames = images[key]
+    // console.log(imageFileNames)
+    options.push(<option value={imageFileNames}>{key}</option>)
+  }
+  return options
+}
+
+interface postData {
+  name: string
+  image: string
   caption: string
-) {
-  const count = 1
-  const fr = new FileReader()
-  fr.readAsDataURL(imageData)
-  fr.addEventListener('load', () => {
-    const imageUrl = fr.result
-    localStorage.setItem(imageKey, imageUrl)
-    imagesObject[count] = { imageKey, imageUrl, caption }
-    count + 1
-    imagesArray.push(imageUrl)
-    // console.log(imagesObject)
-    return imageUrl
-  })
-
-  return imagesObject
 }
-
-let storedImageKey
-
-function loadImageFromLocal(imageKey: string) {
-  storedImageKey = imageKey
-  const imageString = localStorage.getItem(imageKey)
-  console.log(storedImageKey)
-  return imageString
-}
-
-// loadImageFromLocal('Samir')
 
 export function NewPost() {
-  const [name, setName] = useState('')
+  const [post, setPost] = useState({ name: '', image: '', caption: '' })
+  // const [name, setName] = useState('')
+  const [imageSelected, setImageSelected] = useState('')
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const target = event.currentTarget
     const form = new FormData(target)
-    const image = form.get('image')?.valueOf()
+    const image = form.get('dropdown')?.valueOf()
     const caption = form.get('caption')?.valueOf()
     const name = form.get('name')?.valueOf()
-    saveImageToLocal(name as string, image as object, caption as string)
-    setName(name)
+    // setName(name as string)
+    setImageSelected(image as string)
+    setPost({ name: name, image: image, caption: caption } as postData)
+    redirect('/')
   }
 
   return (
     <div className="newPostForm">
       <form onSubmit={handleSubmit} method="post" action="/form">
-        <label htmlFor="name">Name</label>
-        <input id="name" name="name"></input>
-        <label htmlFor="image">Image</label>
-        <input id="image" type="file" alt="" name="image"></input>
+        <label htmlFor="name">Name: </label>
+        <input
+          id="name"
+          name="name"
+          placeholder="Your name to be displayed"
+        ></input>
+        <label htmlFor="dropdown">Select an Image</label>
+        <select
+          name="dropdown"
+          id="dropdown"
+          onChange={(event) => {
+            const selectedImage = event.target.value
+            setImageSelected(selectedImage)
+          }}
+        >
+          {getImages(images)}
+        </select>
         <label htmlFor="caption">Caption</label>
-        <input type="text" name="caption" id="caption"></input>
-        <button type="submit">Submit</button>
+        <input
+          type="text"
+          name="caption"
+          id="caption"
+          placeholder="Enter a caption here!"
+        ></input>
+        <button type="submit" onClick={() => handleSubmit}>
+          Submit
+        </button>
       </form>
-      <img src={loadImageFromLocal(`${name}`)} alt="dsad" />
+      <img
+        width="400px"
+        src={`client/public/images/${imageSelected}`}
+        alt={'alt'}
+      />
     </div>
   )
 }
