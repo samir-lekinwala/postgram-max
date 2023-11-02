@@ -3,3 +3,22 @@ body {
   color: #0a1520;
   font-family: 'Poppins', sans-serif;
 }
+
+li {
+  list-style-type: none;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+.descriptionLiked-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+img {
+  width: 400px;
+  height: auto;
+}
