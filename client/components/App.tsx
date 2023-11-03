@@ -4,8 +4,8 @@ function App() {
   return (
     <>
       <div>
-        <Link to={`/`}>
-          <h1>Postgram-max</h1>
+        <Link to={`/`} style={{ textDecoration: 'none' }}>
+          <h1 className="title">Postgram-max</h1>
         </Link>
       </div>
       <Outlet />
