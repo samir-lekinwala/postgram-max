@@ -93,15 +93,17 @@ function Posts() {
             Submit
           </button>
         </form>
-        <img
-          width="400px"
-          src={`client/public/images/${imageSelected}`}
-          alt={'alt'}
-        />
+        {imageSelected && (
+          <img
+            width="400px"
+            src={`client/public/images/${imageSelected}`}
+            alt={'alt'}
+          />
+        )}
       </div>
 
       <div className="posts">
-        <Link to={`/add`}>Add</Link>
+        {/* <Link to={`/add`}>Add</Link> */}
         <ul>
           {posts.map((post) => (
             <button
