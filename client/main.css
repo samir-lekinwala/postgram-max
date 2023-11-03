@@ -19,13 +19,51 @@ li {
   justify-content: space-between;
 }
 
-img {
+.imagePosts {
+  cursor: pointer;
   width: 400px;
   height: auto;
+  border-radius: 6px;
+  transition: 0.3s;
+  box-shadow: 0px 0px 10px 0px rgb(0, 0, 0);
+}
+.imagePosts:hover {
+  width: 400px;
+  height: auto;
+  transform: translateY(-10px);
 }
 
 .title {
-  text-decoration: none;
   color: rgb(16, 16, 16);
-  /* background-color: red; */
+}
+.title:hover {
+  text-decoration: underline;
+}
+
+form {
+  text-align: center;
+}
+
+form input,
+form select {
+  text-align: center;
+  margin: 20px;
+}
+
+.addImage {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  max-height: 400px;
+  border-radius: 6px;
+}
+
+.owner {
+  font-size: 1.2em;
+  font-family: 'Poppins', sans-serif;
+}
+
+.description {
+  font-family: 'Poppins', sans-serif;
 }

@@ -124,7 +124,7 @@ function Posts() {
               setPost({ name: e.target.value, image: '', caption: '' })
             }
           ></input>
-          <label htmlFor="dropdown">Select an Image</label>
+          <label htmlFor="dropdown">Select an Image:</label>
           <select
             required
             name="dropdown"
@@ -136,7 +136,7 @@ function Posts() {
           >
             {getImages(images)}
           </select>
-          <label htmlFor="caption">Caption</label>
+          <label htmlFor="caption">Caption:</label>
           <input
             required
             type="text"
@@ -159,6 +159,7 @@ function Posts() {
         <br />
         {imageSelected && (
           <img
+            className="addImage"
             width="400px"
             src={`client/public/images/${imageSelected}`}
             alt={'alt'}
@@ -186,8 +187,12 @@ function Posts() {
               }}
             >
               <li>
-                <p>Owner: {post.owner}</p>
-                <img alt={post.description} src={post.img} />
+                <p className="owner">Owner: {post.owner}</p>
+                <img
+                  className="imagePosts"
+                  alt={post.description}
+                  src={post.img}
+                />
                 <div className="descriptionLiked-container">
                   <p className="description">{post.description}</p>
                   <button
